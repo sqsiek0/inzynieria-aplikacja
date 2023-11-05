@@ -23,9 +23,9 @@ class AppTopBar extends StatelessWidget {
             title,
             style: const TextStyle(color: Colors.black),
           ),
-          forceElevated: true,
+          // forceElevated: true,
           floating: true,
-          elevation: 0.1,
+          elevation: 0.2,
           backgroundColor: Colors.white,
           collapsedHeight: 60,
           leading: isBack
