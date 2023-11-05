@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/src/constants/colors.dart';
-import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/src/enums/enums.dart';
 
 class AppBottomBar extends StatefulWidget {
@@ -17,7 +16,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: MediaQuery.of(context).size.height * 0.12,
       color: Colors.white,
       child: Column(
         children: [
