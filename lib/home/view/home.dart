@@ -1,15 +1,14 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
-import 'package:robot_controller/app/src/constants/colors.dart';
-import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
+import 'package:robot_controller/app/view/widgets/app_drawer.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/home/view/widgets/home_robot_container.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, required this.globalKey});
+  final GlobalKey<ScaffoldState> globalKey;
 
   @override
   State<Home> createState() => _HomeState();
@@ -43,6 +42,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: widget.globalKey,
+      drawer: const AppDrawer(),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -52,34 +53,14 @@ class _HomeState extends State<Home> {
               AppTopBar(
                 title: 'Home',
                 opacity: opacity,
+                globalKey: widget.globalKey,
               ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: AppPaddings.horizontalPadding),
-                  child: Container(
-                    height: 300,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColor.blueWithOpacity,
-                            blurRadius: 4,
-                            offset: const Offset(0, -0.50),
-                          )
-                        ],
-                        borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(32),
-                            bottomRight: Radius.circular(32))),
-                  ),
-                ),
-              ),
+              const SliverToBoxAdapter(child: HomeRobotContainer()),
               for (var i = 0; i < 10; i++)
                 SliverToBoxAdapter(
                   child: Container(
                     height: 100,
-                    color: Colors.amber,
+                    color: Colors.transparent,
                   ),
                 )
             ],
@@ -91,9 +72,6 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      // bottomNavigationBar: AppBottomBar(
-      //   appTabState: context.watch<AppBloc>().state.appTabState,
-      // ),
     );
   }
 }

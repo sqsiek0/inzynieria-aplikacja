@@ -4,10 +4,15 @@ import 'package:robot_controller/home/view/home.dart';
 import 'package:robot_controller/trying/cart.dart';
 import 'package:robot_controller/trying/profile.dart';
 
+final GlobalKey<ScaffoldState> key = GlobalKey();
+
 final routes = [
   GoRoute(
     path: '/home',
-    pageBuilder: (context, state) => const MaterialPage(child: Home()),
+    pageBuilder: (context, state) => MaterialPage(
+        child: Home(
+      globalKey: key,
+    )),
   ),
   GoRoute(
     path: '/cart',

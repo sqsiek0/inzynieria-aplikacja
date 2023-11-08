@@ -20,11 +20,18 @@ class _AppBottomBarState extends State<AppBottomBar> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
         child: Container(
           height: MediaQuery.of(context).size.height * 0.12,
           width: double.infinity,
-          color: Colors.grey.withOpacity(0.2),
+          decoration: BoxDecoration(
+              gradient: RadialGradient(
+                  radius: 3,
+                  tileMode: TileMode.repeated,
+                  colors: [
+                Colors.grey.withOpacity(0.05),
+                Colors.black.withOpacity(0.1),
+              ])),
           child: Column(
             children: [
               const Divider(
@@ -40,7 +47,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
                     BottomBarIcon(
                       icon: Icons.home_outlined,
                       color: widget.appTabState == AppTabState.home
-                          ? Colors.amber
+                          ? AppColor.lightBlue
                           : Colors.black,
                       onTap: () {
                         context
@@ -51,7 +58,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
                     BottomBarIcon(
                       icon: Icons.card_travel_outlined,
                       color: widget.appTabState == AppTabState.cart
-                          ? Colors.amber
+                          ? AppColor.lightBlue
                           : Colors.black,
                       onTap: () {
                         context
@@ -62,7 +69,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
                     BottomBarIcon(
                       icon: Icons.person_outline,
                       color: widget.appTabState == AppTabState.profile
-                          ? Colors.amber
+                          ? AppColor.lightBlue
                           : Colors.black,
                       onTap: () {
                         context.read<AppBloc>().add(
