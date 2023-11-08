@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
+import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
 import 'package:robot_controller/app/view/widgets/app_drawer.dart';
+import 'package:robot_controller/app/view/widgets/app_font_20.dart';
+import 'package:robot_controller/app/view/widgets/app_font_24.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/home/view/widgets/home_gps_widget.dart';
 import 'package:robot_controller/home/view/widgets/home_robot_container.dart';
 
 class Home extends StatefulWidget {
@@ -56,6 +60,22 @@ class _HomeState extends State<Home> {
                 globalKey: widget.globalKey,
               ),
               const SliverToBoxAdapter(child: HomeRobotContainer()),
+              const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: AppPaddings.globalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppFont20(text: 'Aktualna pozycja'),
+                      SizedBox(
+                        height: AppPaddings.globalPadding / 2,
+                      ),
+                      HomeGPSWidget()
+                    ],
+                  ),
+                ),
+              ),
               for (var i = 0; i < 10; i++)
                 SliverToBoxAdapter(
                   child: Container(
