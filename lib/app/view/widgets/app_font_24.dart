@@ -9,10 +9,10 @@ class AppFont24 extends StatelessWidget {
     return Text(
       text,
       style: const TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w700,
-        color: Colors.black,
-      ),
+          fontSize: 24,
+          fontWeight: FontWeight.w700,
+          color: Colors.black,
+          fontFamily: 'Majorant'),
     );
   }
 }

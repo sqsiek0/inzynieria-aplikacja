@@ -55,7 +55,7 @@ class _HomeState extends State<Home> {
             controller: scrollController,
             slivers: [
               AppTopBar(
-                title: 'Home',
+                title: 'Główna',
                 opacity: opacity,
                 globalKey: widget.globalKey,
               ),

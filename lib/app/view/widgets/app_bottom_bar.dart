@@ -25,13 +25,15 @@ class _AppBottomBarState extends State<AppBottomBar> {
           height: MediaQuery.of(context).size.height * 0.12,
           width: double.infinity,
           decoration: BoxDecoration(
-              gradient: RadialGradient(
-                  radius: 3,
-                  tileMode: TileMode.repeated,
-                  colors: [
+            gradient: RadialGradient(
+              radius: 3,
+              tileMode: TileMode.repeated,
+              colors: [
                 Colors.grey.withOpacity(0.05),
                 Colors.black.withOpacity(0.1),
-              ])),
+              ],
+            ),
+          ),
           child: Column(
             children: [
               const Divider(
