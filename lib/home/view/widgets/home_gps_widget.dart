@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_tile.dart';
 
 class HomeGPSWidget extends StatelessWidget {
-  const HomeGPSWidget({super.key});
+  const HomeGPSWidget({super.key, required this.location});
+  final Placemark location;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class HomeGPSWidget extends StatelessWidget {
             Row(
               children: [
                 AppFont16(
-                  text: 'Miasto, (51,24 W, 51.24 N)',
+                  text: '${location.locality}, (51,24 W, 51.24 N)',
                   color: Colors.black.withOpacity(0.6),
                 ),
               ],

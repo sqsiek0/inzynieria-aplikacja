@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/router/router.dart';
 import 'package:robot_controller/app/src/enums/enums.dart';
+import 'package:robot_controller/home/cubit/home_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -12,8 +13,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final goRouter = GoRouter(routes: routes, initialLocation: '/home');
 
-    return BlocProvider(
-      create: (context) => AppBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AppBloc(),
+        ),
+        BlocProvider(
+          create: (context) => HomeCubit()..fetchLocation(),
+        ),
+      ],
       child: BlocListener<AppBloc, AppState>(
         listener: (context, state) {
           switch (state.appTabState) {

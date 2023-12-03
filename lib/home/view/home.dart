@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
+import 'package:robot_controller/app/services/state_indicator.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
 import 'package:robot_controller/app/view/widgets/app_drawer.dart';
 import 'package:robot_controller/app/view/widgets/app_font_20.dart';
-import 'package:robot_controller/app/view/widgets/app_font_24.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/home/cubit/home_cubit.dart';
 import 'package:robot_controller/home/view/widgets/home_gps_widget.dart';
 import 'package:robot_controller/home/view/widgets/home_robot_container.dart';
 
@@ -45,53 +46,74 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: widget.globalKey,
-      drawer: const AppDrawer(),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              AppTopBar(
-                title: 'Główna',
-                opacity: opacity,
-                globalKey: widget.globalKey,
-              ),
-              const SliverToBoxAdapter(child: HomeRobotContainer()),
-              const SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: AppPaddings.globalPadding),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppFont20(text: 'Aktualna pozycja'),
-                      SizedBox(
-                        height: AppPaddings.globalPadding / 2,
-                      ),
-                      HomeGPSWidget()
-                    ],
-                  ),
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        return Scaffold(
+          key: widget.globalKey,
+          drawer: const AppDrawer(),
+          body: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              if (state is HomeInitial || state is HomeLoading)
+                const Center(
+                  child: CircularProgressIndicator(),
                 ),
-              ),
-              for (var i = 0; i < 10; i++)
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: 100,
-                    color: Colors.transparent,
-                  ),
-                )
+              if (state is HomeFailed)
+                StateIndicator(
+                  stateIndicatorState: StateIndicatorState.failed,
+                  onTap: () {
+                    context.read<HomeCubit>().fetchLocation();
+                  },
+                ),
+              if (state is HomeSuccess)
+                CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    AppTopBar(
+                      title: 'Główna',
+                      opacity: opacity,
+                      globalKey: widget.globalKey,
+                    ),
+                    const SliverToBoxAdapter(child: HomeRobotContainer()),
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppPaddings.globalPadding),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppFont20(
+                              text: 'Ostatnio używane',
+                              fontWeight: FontWeight.w600,
+                            ),
+                            const SizedBox(
+                              height: AppPaddings.globalPadding / 2,
+                            ),
+                            HomeGPSWidget(
+                              location: state.location,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    for (var i = 0; i < 10; i++)
+                      SliverToBoxAdapter(
+                        child: Container(
+                          height: 100,
+                          color: Colors.transparent,
+                        ),
+                      )
+                  ],
+                ),
+              Positioned(
+                child: AppBottomBar(
+                  appTabState: context.watch<AppBloc>().state.appTabState,
+                ),
+              )
             ],
           ),
-          Positioned(
-            child: AppBottomBar(
-              appTabState: context.watch<AppBloc>().state.appTabState,
-            ),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }

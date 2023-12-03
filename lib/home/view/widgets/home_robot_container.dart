@@ -1,11 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:robot_controller/app/src/constants/colors.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_font_20.dart';
-import 'package:robot_controller/app/view/widgets/app_font_24.dart';
 import 'package:robot_controller/app/view/widgets/app_tile.dart';
 
 class HomeRobotContainer extends StatelessWidget {
