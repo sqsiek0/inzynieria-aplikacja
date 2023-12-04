@@ -78,6 +78,9 @@ flutter:
           weight: 400
         - asset: fonts/Majorant-Md.ttf
           weight: 600
+       
+    - family: Majorant_small
+      fonts:
         - asset: fonts/Majorant-Lt.ttf
           weight: 300
         - asset: fonts/Majorant-Th.ttf
