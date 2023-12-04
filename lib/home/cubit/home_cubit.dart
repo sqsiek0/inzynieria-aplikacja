@@ -17,6 +17,8 @@ class HomeCubit extends Cubit<HomeState> {
 
       emit(HomeSuccess(
         location: placermark.first,
+        longitude: location.longitude,
+        latitude: location.latitude,
         status: Status.success,
       ));
     } catch (e) {

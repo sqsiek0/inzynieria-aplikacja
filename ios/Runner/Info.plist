@@ -28,6 +28,8 @@
 	<string>Program requires GPS to track location and display courts around</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs access to location when in the background.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>This app needs access to location when in the background..</string>
 	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
 	<string>temporart</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

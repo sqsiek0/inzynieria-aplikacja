@@ -9,19 +9,28 @@ class HomeLoading extends HomeState {}
 
 class HomeSuccess extends HomeState {
   final Placemark location;
+  final double longitude;
+  final double latitude;
+
   final Status status;
 
   HomeSuccess({
     required this.location,
+    required this.longitude,
+    required this.latitude,
     required this.status,
   });
 
   HomeSuccess copyWith({
     Placemark? location,
+    double? longitude,
+    double? latitude,
     Status? status,
   }) {
     return HomeSuccess(
       location: location ?? this.location,
+      longitude: longitude ?? this.longitude,
+      latitude: latitude ?? this.latitude,
       status: status ?? this.status,
     );
   }

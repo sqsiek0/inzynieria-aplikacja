@@ -66,44 +66,51 @@ class _HomeState extends State<Home> {
                   },
                 ),
               if (state is HomeSuccess)
-                CustomScrollView(
-                  controller: scrollController,
-                  slivers: [
-                    AppTopBar(
-                      title: 'Główna',
-                      opacity: opacity,
-                      globalKey: widget.globalKey,
-                    ),
-                    const SliverToBoxAdapter(child: HomeRobotContainer()),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppPaddings.globalPadding),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const AppFont20(
-                              text: 'Ostatnio używane',
-                              fontWeight: FontWeight.w600,
-                            ),
-                            const SizedBox(
-                              height: AppPaddings.globalPadding / 2,
-                            ),
-                            HomeGPSWidget(
-                              location: state.location,
-                            )
-                          ],
+                RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<HomeCubit>().fetchLocation();
+                  },
+                  child: CustomScrollView(
+                    controller: scrollController,
+                    slivers: [
+                      AppTopBar(
+                        title: 'Główna',
+                        opacity: opacity,
+                        globalKey: widget.globalKey,
+                      ),
+                      const SliverToBoxAdapter(child: HomeRobotContainer()),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppPaddings.globalPadding),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const AppFont20(
+                                text: 'Ostatnio używane',
+                                fontWeight: FontWeight.w600,
+                              ),
+                              const SizedBox(
+                                height: AppPaddings.globalPadding / 2,
+                              ),
+                              HomeGPSWidget(
+                                location: state.location,
+                                longitude: state.longitude,
+                                latitude: state.latitude,
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    for (var i = 0; i < 10; i++)
-                      SliverToBoxAdapter(
-                        child: Container(
-                          height: 100,
-                          color: Colors.transparent,
-                        ),
-                      )
-                  ],
+                      for (var i = 0; i < 10; i++)
+                        SliverToBoxAdapter(
+                          child: Container(
+                            height: 100,
+                            color: Colors.transparent,
+                          ),
+                        )
+                    ],
+                  ),
                 ),
               Positioned(
                 child: AppBottomBar(
