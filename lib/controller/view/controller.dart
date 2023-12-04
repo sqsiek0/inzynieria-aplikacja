@@ -4,6 +4,7 @@ import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
 import 'package:robot_controller/app/view/widgets/app_drawer.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/controller/view/widgets/body_controller.dart';
 import 'package:robot_controller/home/cubit/home_cubit.dart';
 
 class Controller extends StatefulWidget {
@@ -57,6 +58,9 @@ class _ControllerState extends State<Controller> {
                     opacity: opacity,
                     globalKey: widget.globalKey,
                   ),
+                  const SliverToBoxAdapter(
+                    child: BodyController(),
+                  )
                 ],
               ),
               Positioned(

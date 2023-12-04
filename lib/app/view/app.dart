@@ -1,7 +1,5 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/router/router.dart';
 import 'package:robot_controller/app/src/enums/enums.dart';
@@ -12,7 +10,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final goRouter = GoRouter(routes: routes, initialLocation: '/home');
+    // final goRouter = GoRouter(routes: routes, initialLocation: '/home');
 
     return MultiBlocProvider(
       providers: [
@@ -27,18 +25,22 @@ class App extends StatelessWidget {
         listener: (context, state) {
           switch (state.appTabState) {
             case AppTabState.home:
-              goRouter.go('/home');
+              AppRouter().router.go('/');
+              break;
             case AppTabState.controller:
-              goRouter.go('/controller');
+              AppRouter().router.go('/controller');
+              break;
             case AppTabState.profile:
-              goRouter.go('/profile');
+              AppRouter().router.go('/profile');
+              break;
             default:
-              goRouter.go('/home');
+              break;
+            //   newLocation = 'home';
           }
         },
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
-          routerConfig: goRouter,
+          routerConfig: AppRouter().router,
         ),
       ),
     );
