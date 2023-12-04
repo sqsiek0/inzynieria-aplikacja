@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:robot_controller/app/src/constants/colors.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_tile.dart';
@@ -41,9 +42,10 @@ class HomeGPSWidget extends StatelessWidget {
                     point: LatLng(latitude, longitude),
                     width: 40,
                     height: 40,
-                    builder: (ctx) => const Icon(
-                      Icons.location_on_outlined,
+                    builder: (ctx) => Icon(
+                      Icons.location_on,
                       size: 40,
+                      color: AppColor.red,
                     ),
                   ),
                 ],

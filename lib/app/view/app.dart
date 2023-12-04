@@ -28,8 +28,8 @@ class App extends StatelessWidget {
           switch (state.appTabState) {
             case AppTabState.home:
               goRouter.go('/home');
-            case AppTabState.cart:
-              goRouter.go('/cart');
+            case AppTabState.controller:
+              goRouter.go('/controller');
             case AppTabState.profile:
               goRouter.go('/profile');
             default:

@@ -39,10 +39,10 @@ class _HomeState extends State<Home> {
   }
 
   @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
+  // void dispose() {
+  //   scrollController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -102,13 +102,11 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      for (var i = 0; i < 10; i++)
-                        SliverToBoxAdapter(
-                          child: Container(
-                            height: 100,
-                            color: Colors.transparent,
-                          ),
-                        )
+                      const SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 150,
+                        ),
+                      )
                     ],
                   ),
                 ),

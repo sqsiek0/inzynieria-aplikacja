@@ -58,14 +58,13 @@ class _AppBottomBarState extends State<AppBottomBar> {
                       },
                     ),
                     BottomBarIcon(
-                      icon: Icons.card_travel_outlined,
-                      color: widget.appTabState == AppTabState.cart
+                      icon: Icons.sports_esports_outlined,
+                      color: widget.appTabState == AppTabState.controller
                           ? AppColor.lightBlue
                           : Colors.black,
                       onTap: () {
-                        context
-                            .read<AppBloc>()
-                            .add(AppChangeTab(appTabState: AppTabState.cart));
+                        context.read<AppBloc>().add(
+                            AppChangeTab(appTabState: AppTabState.controller));
                       },
                     ),
                     BottomBarIcon(
