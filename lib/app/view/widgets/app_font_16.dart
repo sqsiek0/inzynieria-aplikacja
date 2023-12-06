@@ -7,11 +7,13 @@ class AppFont16 extends StatelessWidget {
     this.fontWeight,
     this.fontSize,
     this.color,
+    this.isBigMajorant = false,
   });
   final String text;
   final Color? color;
   final FontWeight? fontWeight;
   final double? fontSize;
+  final bool isBigMajorant;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class AppFont16 extends StatelessWidget {
           fontSize: fontSize ?? 16,
           fontWeight: fontWeight ?? FontWeight.w400,
           color: color ?? Colors.black,
-          fontFamily: 'Majorant_small',
+          fontFamily: isBigMajorant ? 'Majorant' : 'Majorant_small',
         ));
   }
 }
