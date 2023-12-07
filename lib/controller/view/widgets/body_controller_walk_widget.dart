@@ -165,7 +165,10 @@ class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
                 ),
               ],
             ),
-          )
+          ),
+        const SizedBox(
+          height: 100,
+        )
       ],
     );
   }

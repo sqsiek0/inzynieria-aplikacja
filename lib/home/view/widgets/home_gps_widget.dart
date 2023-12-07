@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:robot_controller/app/hive/models/coordinates_model.dart';
 import 'package:robot_controller/app/src/constants/colors.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
@@ -19,18 +21,16 @@ class HomeGPSWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final coordinates =
+        Hive.box<CoordinatedModel>('coordinates').get('location');
+
     return AppTile(
         child: Column(
       children: [
-        // Container(
-        //   height: 150,
-        //   width: double.infinity,
-        //   color: Colors.amber.shade100,
-        // ),
         SizedBox(
           height: 200,
           child: FlutterMap(
-            options: MapOptions(center: LatLng(latitude, longitude)),
+            options: MapOptions(initialCenter: LatLng(latitude, longitude)),
             children: [
               TileLayer(
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -42,7 +42,7 @@ class HomeGPSWidget extends StatelessWidget {
                     point: LatLng(latitude, longitude),
                     width: 40,
                     height: 40,
-                    builder: (ctx) => Icon(
+                    child: Icon(
                       Icons.location_on,
                       size: 40,
                       color: AppColor.red,
@@ -71,7 +71,7 @@ class HomeGPSWidget extends StatelessWidget {
               children: [
                 AppFont16(
                   text:
-                      '${location.subLocality}, (${latitude.toStringAsFixed(2)} ${longitude > 0 ? 'N' : 'S'}, ${longitude.toStringAsFixed(2)} ${longitude > 0 ? 'E' : 'W'},)',
+                      '${coordinates?.city ?? 'Brak'}, (${coordinates?.latitude ?? 0} ${(coordinates?.latitude ?? 0) > 0 ? 'N' : 'S'}, ${coordinates?.longitude ?? 0} ${(coordinates?.longitude ?? 0) > 0 ? 'E' : 'W'})',
                   color: Colors.black.withOpacity(0.6),
                 ),
               ],
