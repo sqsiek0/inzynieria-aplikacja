@@ -39,6 +39,9 @@ class _ProfileState extends State<Profile> {
       backgroundColor: Colors.white,
       key: widget.globalKey,
       drawer: const AppDrawer(),
+      bottomNavigationBar: AppBottomBar(
+        appTabState: context.watch<AppBloc>().state.appTabState,
+      ),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -59,11 +62,6 @@ class _ProfileState extends State<Profile> {
               )
             ],
           ),
-          Positioned(
-            child: AppBottomBar(
-              appTabState: context.watch<AppBloc>().state.appTabState,
-            ),
-          )
         ],
       ),
     );

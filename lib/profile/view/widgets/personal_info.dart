@@ -1,8 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
+import 'package:robot_controller/app/view/widgets/app_font_16.dart';
+import 'package:robot_controller/app/view/widgets/app_font_32.dart';
+import 'package:robot_controller/profile/view/widgets/profile_textfields.dart';
 
-class PersonalInfo extends StatelessWidget {
+class PersonalInfo extends StatefulWidget {
   const PersonalInfo({super.key});
+
+  @override
+  State<PersonalInfo> createState() => _PersonalInfoState();
+}
+
+class _PersonalInfoState extends State<PersonalInfo> {
+  late final TextEditingController _nameController;
+  late final TextEditingController _surnameController;
+  late final TextEditingController _jobController;
+
+  @override
+  void initState() {
+    _nameController = TextEditingController();
+    _surnameController = TextEditingController();
+    _jobController = TextEditingController();
+
+    String oldName = _nameController.text;
+    String oldSurname = _surnameController.text;
+    String oldJob = _jobController.text;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _surnameController.dispose();
+    _jobController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,22 +83,29 @@ class PersonalInfo extends StatelessWidget {
             ),
           ],
         ),
-        const Column(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 50),
-              child: Text(
-                'John Doe',
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: AppPaddings.globalPadding),
+                child: AppFont32(text: 'Klaudiusz Kalinowski'),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Text(''),
-            )
+            const Center(
+              child: AppFont16(
+                text: 'Młodszy programista',
+                isBigMajorant: true,
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ProfileTextFields(
+              nameController: _nameController,
+              surnameController: _surnameController,
+              jobController: _jobController,
+            ),
           ],
         ),
       ],
