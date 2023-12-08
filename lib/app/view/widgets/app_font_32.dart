@@ -8,6 +8,7 @@ class AppFont32 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: TextAlign.center,
       style: const TextStyle(
         fontSize: 32,
         fontWeight: FontWeight.w700,

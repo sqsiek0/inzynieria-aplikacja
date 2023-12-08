@@ -9,10 +9,12 @@ class AppTextFieldTtile extends StatelessWidget {
     required this.title,
     required this.controller,
     required this.isEnd,
+    this.onChanged,
   });
   final String title;
   final TextEditingController controller;
   final bool isEnd;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class AppTextFieldTtile extends StatelessWidget {
           ),
           TextFormField(
             controller: controller,
+            onChanged: onChanged,
             textInputAction:
                 isEnd ? TextInputAction.done : TextInputAction.next,
             decoration: InputDecoration(

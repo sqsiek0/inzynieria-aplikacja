@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_button.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_font_32.dart';
+import 'package:robot_controller/profile/cubit/profile_cubit.dart';
 import 'package:robot_controller/profile/view/widgets/profile_textfields.dart';
 
 class PersonalInfo extends StatefulWidget {
@@ -29,11 +31,14 @@ class _PersonalInfoState extends State<PersonalInfo> {
   String? oldSurname;
   String? oldJob;
 
+  bool isChanges = false;
+
   @override
   void initState() {
-    _nameController = TextEditingController();
-    _surnameController = TextEditingController();
-    _jobController = TextEditingController();
+    _nameController = TextEditingController(
+        text: widget.name == 'Brak imienia' ? '' : widget.name);
+    _surnameController = TextEditingController(text: widget.surname);
+    _jobController = TextEditingController(text: widget.job);
 
     oldName = _nameController.text;
     oldSurname = _surnameController.text;
@@ -69,9 +74,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.elliptical(
-                          MediaQuery.of(context).size.width, 50),
+                        MediaQuery.of(context).size.width,
+                        50,
+                      ),
                       topRight: Radius.elliptical(
-                          MediaQuery.of(context).size.width, 50),
+                        MediaQuery.of(context).size.width,
+                        50,
+                      ),
                     ),
                   ),
                 ),
@@ -97,13 +106,12 @@ class _PersonalInfoState extends State<PersonalInfo> {
           ],
         ),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
-                child: AppFont32(text: '${widget.name} ${widget.surname}'),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
+              child: AppFont32(text: '${widget.name} ${widget.surname}'),
             ),
             Center(
               child: AppFont16(
@@ -118,17 +126,32 @@ class _PersonalInfoState extends State<PersonalInfo> {
               nameController: _nameController,
               surnameController: _surnameController,
               jobController: _jobController,
+              onChanged: (value) {
+                setState(() {
+                  isChanges = true;
+                });
+              },
             ),
-            // if (oldName != _nameController.text ||
-            //     oldSurname != _surnameController.text ||
-            //     oldJob != _jobController.text)
-            Padding(
-              padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
-              child: AppButton(
-                text: 'Zapisz',
-                onPressed: () {},
-              ),
-            )
+            if (isChanges)
+              Padding(
+                padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
+                child: AppButton(
+                  text: 'Zapisz',
+                  onPressed: () {
+                    context.read<ProfileCubit>().updateData(
+                          name: _nameController.text,
+                          surname: _surnameController.text,
+                          job: _jobController.text,
+                        );
+                    oldName = _nameController.text;
+                    oldSurname = _surnameController.text;
+                    oldJob = _jobController.text;
+                    setState(() {
+                      isChanges = false;
+                    });
+                  },
+                ),
+              )
           ],
         ),
       ],
