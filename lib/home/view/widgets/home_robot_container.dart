@@ -29,10 +29,21 @@ class HomeRobotContainer extends StatelessWidget {
                   color: AppColor.green,
                   padding: 10,
                   radius: 16,
-                  child: const AppFont20(
-                    text: 'Połączony',
-                    color: Colors.white,
-                    fontWeight: FontWeight.w200,
+                  child: const Row(
+                    children: [
+                      Icon(
+                        Icons.link,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: AppPaddings.globalPadding / 2,
+                      ),
+                      AppFont16(
+                        text: 'Połączony',
+                        color: Colors.white,
+                        isBigMajorant: true,
+                      )
+                    ],
                   ),
                 )
               ],

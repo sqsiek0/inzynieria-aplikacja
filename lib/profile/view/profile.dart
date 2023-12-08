@@ -4,6 +4,7 @@ import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
 import 'package:robot_controller/app/view/widgets/app_drawer.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/profile/view/widgets/personal_info.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key, required this.globalKey});
@@ -35,6 +36,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       key: widget.globalKey,
       drawer: const AppDrawer(),
       body: Stack(
@@ -48,8 +50,12 @@ class _ProfileState extends State<Profile> {
                 opacity: opacity,
                 globalKey: widget.globalKey,
               ),
-              SliverToBoxAdapter(
-                child: Container(),
+              const SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    PersonalInfo(),
+                  ],
+                ),
               )
             ],
           ),
