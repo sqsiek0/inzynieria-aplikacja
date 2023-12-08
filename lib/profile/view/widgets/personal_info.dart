@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
+import 'package:robot_controller/app/view/widgets/app_button.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_font_32.dart';
 import 'package:robot_controller/profile/view/widgets/profile_textfields.dart';
 
 class PersonalInfo extends StatefulWidget {
-  const PersonalInfo({super.key});
+  const PersonalInfo({
+    super.key,
+    required this.name,
+    required this.surname,
+    required this.job,
+  });
+  final String name;
+  final String surname;
+  final String job;
 
   @override
   State<PersonalInfo> createState() => _PersonalInfoState();
@@ -16,15 +25,19 @@ class _PersonalInfoState extends State<PersonalInfo> {
   late final TextEditingController _surnameController;
   late final TextEditingController _jobController;
 
+  String? oldName;
+  String? oldSurname;
+  String? oldJob;
+
   @override
   void initState() {
     _nameController = TextEditingController();
     _surnameController = TextEditingController();
     _jobController = TextEditingController();
 
-    String oldName = _nameController.text;
-    String oldSurname = _surnameController.text;
-    String oldJob = _jobController.text;
+    oldName = _nameController.text;
+    oldSurname = _surnameController.text;
+    oldJob = _jobController.text;
     super.initState();
   }
 
@@ -86,15 +99,15 @@ class _PersonalInfoState extends State<PersonalInfo> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
               child: Padding(
-                padding: EdgeInsets.only(top: AppPaddings.globalPadding),
-                child: AppFont32(text: 'Klaudiusz Kalinowski'),
+                padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
+                child: AppFont32(text: '${widget.name} ${widget.surname}'),
               ),
             ),
-            const Center(
+            Center(
               child: AppFont16(
-                text: 'Młodszy programista',
+                text: widget.job,
                 isBigMajorant: true,
               ),
             ),
@@ -106,6 +119,16 @@ class _PersonalInfoState extends State<PersonalInfo> {
               surnameController: _surnameController,
               jobController: _jobController,
             ),
+            // if (oldName != _nameController.text ||
+            //     oldSurname != _surnameController.text ||
+            //     oldJob != _jobController.text)
+            Padding(
+              padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
+              child: AppButton(
+                text: 'Zapisz',
+                onPressed: () {},
+              ),
+            )
           ],
         ),
       ],

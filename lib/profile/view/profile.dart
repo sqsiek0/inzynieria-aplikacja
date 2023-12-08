@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/bloc/app_bloc.dart';
+import 'package:robot_controller/app/services/state_indicator.dart';
+import 'package:robot_controller/app/src/enums/enums.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
 import 'package:robot_controller/app/view/widgets/app_drawer.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/profile/cubit/profile_cubit.dart';
 import 'package:robot_controller/profile/view/widgets/personal_info.dart';
 
 class Profile extends StatefulWidget {
@@ -42,27 +45,47 @@ class _ProfileState extends State<Profile> {
       bottomNavigationBar: AppBottomBar(
         appTabState: context.watch<AppBloc>().state.appTabState,
       ),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          CustomScrollView(
-            controller: scrollController,
-            slivers: [
-              AppTopBar(
-                title: 'Profil',
-                opacity: opacity,
-                globalKey: widget.globalKey,
+      body: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (context, state) {
+          return Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              CustomScrollView(
+                controller: scrollController,
+                slivers: [
+                  AppTopBar(
+                    title: 'Profil',
+                    opacity: opacity,
+                    globalKey: widget.globalKey,
+                  ),
+                  SliverToBoxAdapter(
+                    child: Column(
+                      children: [
+                        if (state.status == Status.loading ||
+                            state.status == Status.initial)
+                          const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        if (state.status == Status.failed)
+                          StateIndicator(
+                            stateIndicatorState: StateIndicatorState.failed,
+                            onTap: () =>
+                                context.read<ProfileCubit>().fetchData(),
+                          ),
+                        if (state.status == Status.success)
+                          PersonalInfo(
+                            name: state.name,
+                            surname: state.surname,
+                            job: state.job,
+                          ),
+                      ],
+                    ),
+                  )
+                ],
               ),
-              const SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    PersonalInfo(),
-                  ],
-                ),
-              )
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

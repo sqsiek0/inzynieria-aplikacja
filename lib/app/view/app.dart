@@ -4,6 +4,7 @@ import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/router/router.dart';
 import 'package:robot_controller/app/src/enums/enums.dart';
 import 'package:robot_controller/home/cubit/home_cubit.dart';
+import 'package:robot_controller/profile/cubit/profile_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -19,6 +20,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeCubit()..fetchLocation(),
+        ),
+        BlocProvider(
+          create: (context) => ProfileCubit()..fetchData(),
         ),
       ],
       child: BlocListener<AppBloc, AppState>(

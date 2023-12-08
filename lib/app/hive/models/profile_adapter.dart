@@ -20,7 +20,7 @@ class ProfileModelAdapter extends TypeAdapter<ProfileModel> {
 
   @override
   void write(BinaryWriter writer, ProfileModel obj) {
-    writer.writeString(obj.name);
+    writer.writeString(obj.name ?? 'Brak imienia');
     writer.writeString(obj.surname ?? '');
     writer.writeString(obj.job ?? '');
   }

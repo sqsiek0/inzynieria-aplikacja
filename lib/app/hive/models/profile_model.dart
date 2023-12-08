@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 @HiveType(typeId: 0)
 class ProfileModel extends HiveObject {
   @HiveField(0)
-  String name;
+  String? name;
 
   @HiveField(1)
   String? surname;
@@ -13,7 +13,7 @@ class ProfileModel extends HiveObject {
   String? job;
 
   ProfileModel({
-    required this.name,
+    this.name = 'Brak imienia',
     this.surname,
     this.job,
   });
