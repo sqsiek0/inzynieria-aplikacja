@@ -5,6 +5,7 @@ import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_font_20.dart';
 import 'package:robot_controller/app/view/widgets/app_tile.dart';
+import 'package:robot_controller/controller/cubit/controller_cubit.dart';
 import 'package:robot_controller/home/cubit/home_cubit.dart';
 
 class HomeRobotContainer extends StatelessWidget {
@@ -30,6 +31,7 @@ class HomeRobotContainer extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     context.read<HomeCubit>().isRobotWorking();
+                    context.read<ControllerCubit>().changeVisibility();
                   },
                   child: AppTile(
                     isExpanded: false,

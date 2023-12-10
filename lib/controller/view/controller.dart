@@ -4,8 +4,9 @@ import 'package:robot_controller/app/bloc/app_bloc.dart';
 import 'package:robot_controller/app/view/widgets/app_bottom_bar.dart';
 import 'package:robot_controller/app/view/widgets/app_drawer.dart';
 import 'package:robot_controller/app/view/widgets/app_top_bar.dart';
+import 'package:robot_controller/controller/cubit/controller_cubit.dart';
 import 'package:robot_controller/controller/view/widgets/body_controller.dart';
-import 'package:robot_controller/home/cubit/home_cubit.dart';
+import 'package:robot_controller/controller/view/widgets/body_controller_not_connected.dart';
 
 class Controller extends StatefulWidget {
   const Controller({super.key, required this.globalKey});
@@ -42,7 +43,7 @@ class _ControllerState extends State<Controller> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<ControllerCubit, ControllerState>(
       builder: (context, state) {
         return Scaffold(
           key: widget.globalKey,
@@ -58,8 +59,10 @@ class _ControllerState extends State<Controller> {
                     opacity: opacity,
                     globalKey: widget.globalKey,
                   ),
-                  const SliverToBoxAdapter(
-                    child: BodyController(),
+                  SliverToBoxAdapter(
+                    child: state.isWorking
+                        ? const BodyController()
+                        : const ControllerNotConnected(),
                   )
                 ],
               ),
