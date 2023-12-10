@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/src/constants/colors.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/src/enums/enums.dart';
 import 'package:robot_controller/app/view/widgets/app_font_20.dart';
+import 'package:robot_controller/controller/cubit/controller_cubit.dart';
 
 class BodyControllerWalkWidget extends StatefulWidget {
   const BodyControllerWalkWidget({super.key});
@@ -15,6 +17,7 @@ class BodyControllerWalkWidget extends StatefulWidget {
 class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
   bool walkValue = false;
   ButtonDirection buttonDirection = ButtonDirection.stop;
+  ButtonDirection oldButtonDirection = ButtonDirection.stop;
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +58,14 @@ class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
                 InkWell(
                   borderRadius: BorderRadius.circular(50),
                   onTap: () {
-                    setState(() {
-                      buttonDirection = ButtonDirection.left;
-                    });
+                    setState(
+                      () {
+                        buttonDirection = ButtonDirection.left;
+                      },
+                    );
+                    context
+                        .read<ControllerCubit>()
+                        .turning(buttonDirection.name);
                   },
                   child: Container(
                     width: 50,
@@ -81,14 +89,17 @@ class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
                         setState(() {
-                          buttonDirection = ButtonDirection.up;
+                          buttonDirection = ButtonDirection.front;
                         });
+                        context
+                            .read<ControllerCubit>()
+                            .walk(buttonDirection.name);
                       },
                       child: Container(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: buttonDirection == ButtonDirection.up
+                          color: buttonDirection == ButtonDirection.front
                               ? AppColor.lightBlue
                               : Colors.grey.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(50),
@@ -103,6 +114,9 @@ class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
                         setState(() {
                           buttonDirection = ButtonDirection.stop;
                         });
+                        context
+                            .read<ControllerCubit>()
+                            .walk(buttonDirection.name);
                       },
                       child: Container(
                         width: 50,
@@ -125,20 +139,25 @@ class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
                       borderRadius: BorderRadius.circular(50),
                       onTap: () {
                         setState(() {
-                          buttonDirection = ButtonDirection.down;
+                          buttonDirection = ButtonDirection.back;
                         });
+                        context
+                            .read<ControllerCubit>()
+                            .walk(buttonDirection.name);
                       },
                       child: Container(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: buttonDirection == ButtonDirection.down
+                          color: buttonDirection == ButtonDirection.back
                               ? AppColor.lightBlue
                               : Colors.grey.withOpacity(0.3),
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: const Icon(Icons.keyboard_arrow_down_rounded,
-                            size: 35),
+                        child: const Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          size: 35,
+                        ),
                       ),
                     )
                   ],
@@ -149,6 +168,9 @@ class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
                     setState(() {
                       buttonDirection = ButtonDirection.right;
                     });
+                    context
+                        .read<ControllerCubit>()
+                        .turning(buttonDirection.name);
                   },
                   child: Container(
                     width: 50,

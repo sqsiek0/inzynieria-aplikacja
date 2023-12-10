@@ -165,12 +165,12 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                           onPlusTap: () {
                             context
                                 .read<ControllerCubit>()
-                                .translateBody(ButtonAxis.x.name, 'plus');
+                                .rotateBody(ButtonAxis.x.name, 'plus');
                           },
                           onMinusTap: () {
                             context
                                 .read<ControllerCubit>()
-                                .translateBody(ButtonAxis.x.name, 'minus');
+                                .rotateBody(ButtonAxis.x.name, 'minus');
                           },
                         ),
                         const SizedBox(
@@ -187,12 +187,12 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                           onPlusTap: () {
                             context
                                 .read<ControllerCubit>()
-                                .translateBody(ButtonAxis.y.name, 'plus');
+                                .rotateBody(ButtonAxis.y.name, 'plus');
                           },
                           onMinusTap: () {
                             context
                                 .read<ControllerCubit>()
-                                .translateBody(ButtonAxis.y.name, 'minus');
+                                .rotateBody(ButtonAxis.y.name, 'minus');
                           },
                         ),
                         const SizedBox(
@@ -209,12 +209,12 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                           onPlusTap: () {
                             context
                                 .read<ControllerCubit>()
-                                .translateBody(ButtonAxis.z.name, 'plus');
+                                .rotateBody(ButtonAxis.z.name, 'plus');
                           },
                           onMinusTap: () {
                             context
                                 .read<ControllerCubit>()
-                                .translateBody(ButtonAxis.z.name, 'minus');
+                                .rotateBody(ButtonAxis.z.name, 'minus');
                           },
                         ),
                         const SizedBox(

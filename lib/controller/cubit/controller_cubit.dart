@@ -7,7 +7,7 @@ part 'controller_state.dart';
 class ControllerCubit extends Cubit<ControllerState> {
   ControllerCubit()
       : super(
-          ControllerState(isWorking: false, status: Status.initial),
+          ControllerState(status: Status.initial),
         );
   final ControllerRepository _controllerRepository = ControllerRepository();
 
@@ -20,11 +20,72 @@ class ControllerCubit extends Cubit<ControllerState> {
     String value,
   ) async {
     try {
-      emit(state.copyWith(isLoading: true));
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
       await _controllerRepository.translateBody(axis, value);
-      emit(state.copyWith(isLoading: false));
+      emit(
+        state.copyWith(
+          isLoading: false,
+        ),
+      );
     } catch (e) {
       emit(state.copyWith(status: Status.failed));
+    }
+  }
+
+  Future<void> rotateBody(
+    String axis,
+    String value,
+  ) async {
+    try {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+      await _controllerRepository.translateBody(axis, value);
+      emit(
+        state.copyWith(
+          isLoading: false,
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: Status.failed));
+    }
+  }
+
+  Future<void> walk(String walkState) async {
+    try {
+      emit(
+        state.copyWith(),
+      );
+      await _controllerRepository.walk(walkState);
+      emit(
+        state.copyWith(),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: Status.failed));
+    }
+  }
+
+  Future<void> turning(String turnState) async {
+    try {
+      emit(
+        state.copyWith(),
+      );
+      await _controllerRepository.turning(turnState);
+      emit(
+        state.copyWith(),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: Status.failed,
+        ),
+      );
     }
   }
 }
