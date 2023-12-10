@@ -4,7 +4,8 @@ import 'package:robot_controller/controller/view/widgets/body_controller_body_wi
 import 'package:robot_controller/controller/view/widgets/body_controller_walk_widget.dart';
 
 class BodyController extends StatefulWidget {
-  const BodyController({super.key});
+  const BodyController({super.key, required this.isLoading});
+  final bool isLoading;
 
   @override
   State<BodyController> createState() => _BodyControllerState();
@@ -13,18 +14,20 @@ class BodyController extends StatefulWidget {
 class _BodyControllerState extends State<BodyController> {
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
             horizontal: AppPaddings.horizontalPadding,
             vertical: AppPaddings.globalPadding),
         child: Column(
           children: [
-            BodyControllerBodyWidget(),
-            SizedBox(
+            BodyControllerBodyWidget(
+              isLoading: widget.isLoading,
+            ),
+            const SizedBox(
               height: AppPaddings.globalPadding,
             ),
-            BodyControllerWalkWidget()
+            const BodyControllerWalkWidget()
           ],
         ),
       ),

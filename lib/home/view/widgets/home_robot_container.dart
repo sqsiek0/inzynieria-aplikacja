@@ -29,9 +29,12 @@ class HomeRobotContainer extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
                 InkWell(
-                  onTap: () {
-                    context.read<HomeCubit>().isRobotWorking();
-                    context.read<ControllerCubit>().changeVisibility();
+                  onTap: () async {
+                    await context.read<HomeCubit>().isRobotWorking().then(
+                          (value) => context
+                              .read<ControllerCubit>()
+                              .changeVisibility(),
+                        );
                   },
                   child: AppTile(
                     isExpanded: false,

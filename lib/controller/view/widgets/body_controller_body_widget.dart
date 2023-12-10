@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/src/constants/colors.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
+import 'package:robot_controller/app/src/enums/enums.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_font_20.dart';
+import 'package:robot_controller/controller/cubit/controller_cubit.dart';
 import 'package:robot_controller/controller/view/widgets/body_controller_button.dart';
 
 class BodyControllerBodyWidget extends StatefulWidget {
-  const BodyControllerBodyWidget({super.key});
+  const BodyControllerBodyWidget({super.key, required this.isLoading});
+  final bool isLoading;
 
   @override
   State<BodyControllerBodyWidget> createState() =>
@@ -14,8 +18,6 @@ class BodyControllerBodyWidget extends StatefulWidget {
 }
 
 class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
-  double transOpacity = 1;
-  double rotOpacity = 1;
   bool bodyValue = true;
 
   @override
@@ -60,14 +62,7 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
           Padding(
             padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
             child: AnimatedOpacity(
-              opacity: transOpacity,
-              onEnd: () {
-                Future.delayed(const Duration(milliseconds: 500), () {
-                  setState(() {
-                    transOpacity = 1;
-                  });
-                });
-              },
+              opacity: widget.isLoading ? 0.5 : 1,
               duration: const Duration(milliseconds: 50),
               child: Row(
                 children: [
@@ -75,12 +70,15 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                     child: Column(
                       children: [
                         BodyControllerButton(
-                          onTap: () {
-                            setState(
-                              () {
-                                transOpacity = 0.5;
-                              },
-                            );
+                          onPlusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.x.name, 'plus');
+                          },
+                          onMinusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.x.name, 'minus');
                           },
                         ),
                         const SizedBox(
@@ -92,25 +90,47 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       children: [
-                        BodyControllerButton(),
-                        SizedBox(
+                        BodyControllerButton(
+                          onPlusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.y.name, 'plus');
+                          },
+                          onMinusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.y.name, 'minus');
+                          },
+                        ),
+                        const SizedBox(
                           height: 10,
                         ),
-                        AppFont16(text: 'Y')
+                        const AppFont16(text: 'Y')
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       children: [
-                        BodyControllerButton(),
-                        SizedBox(
+                        BodyControllerButton(
+                          onPlusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.z.name, 'plus');
+                          },
+                          onMinusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.z.name, 'minus');
+                          },
+                        ),
+                        const SizedBox(
                           height: 10,
                         ),
-                        AppFont16(text: 'Z')
+                        const AppFont16(text: 'Z')
                       ],
                     ),
                   ),
@@ -134,17 +154,7 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
           Padding(
             padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
             child: AnimatedOpacity(
-              onEnd: () {
-                Future.delayed(
-                  const Duration(milliseconds: 500),
-                  () {
-                    setState(() {
-                      rotOpacity = 1;
-                    });
-                  },
-                );
-              },
-              opacity: rotOpacity,
+              opacity: widget.isLoading ? 0.5 : 1,
               duration: const Duration(milliseconds: 50),
               child: Row(
                 children: [
@@ -152,12 +162,15 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                     child: Column(
                       children: [
                         BodyControllerButton(
-                          onTap: () {
-                            setState(
-                              () {
-                                rotOpacity = 0.5;
-                              },
-                            );
+                          onPlusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.x.name, 'plus');
+                          },
+                          onMinusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.x.name, 'minus');
                           },
                         ),
                         const SizedBox(
@@ -167,25 +180,47 @@ class _BodyControllerBodyWidgetState extends State<BodyControllerBodyWidget> {
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       children: [
-                        BodyControllerButton(),
-                        SizedBox(
+                        BodyControllerButton(
+                          onPlusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.y.name, 'plus');
+                          },
+                          onMinusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.y.name, 'minus');
+                          },
+                        ),
+                        const SizedBox(
                           height: 10,
                         ),
-                        AppFont16(text: 'Y')
+                        const AppFont16(text: 'Y')
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       children: [
-                        BodyControllerButton(),
-                        SizedBox(
+                        BodyControllerButton(
+                          onPlusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.z.name, 'plus');
+                          },
+                          onMinusTap: () {
+                            context
+                                .read<ControllerCubit>()
+                                .translateBody(ButtonAxis.z.name, 'minus');
+                          },
+                        ),
+                        const SizedBox(
                           height: 10,
                         ),
-                        AppFont16(text: 'Z')
+                        const AppFont16(text: 'Z')
                       ],
                     ),
                   ),

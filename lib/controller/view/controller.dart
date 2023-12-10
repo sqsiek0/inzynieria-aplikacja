@@ -61,7 +61,9 @@ class _ControllerState extends State<Controller> {
                   ),
                   SliverToBoxAdapter(
                     child: state.isWorking
-                        ? const BodyController()
+                        ? BodyController(
+                            isLoading: state.isLoading,
+                          )
                         : const ControllerNotConnected(),
                   )
                 ],

@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 
 class BodyControllerButton extends StatelessWidget {
-  const BodyControllerButton({super.key, this.onTap});
-  final VoidCallback? onTap;
+  const BodyControllerButton({
+    super.key,
+    this.onPlusTap,
+    this.onMinusTap,
+  });
+  final VoidCallback? onPlusTap;
+  final VoidCallback? onMinusTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class BodyControllerButton extends StatelessWidget {
                 topLeft: Radius.circular(10),
                 topRight: Radius.circular(10),
               ),
-              onTap: onTap,
+              onTap: onPlusTap,
               child: const Padding(
                 padding:
                     EdgeInsets.only(bottom: AppPaddings.globalPadding * 0.75),
@@ -38,10 +43,10 @@ class BodyControllerButton extends StatelessWidget {
             ),
             InkWell(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
               ),
-              onTap: () {},
+              onTap: onMinusTap,
               child: const Padding(
                 padding: EdgeInsets.only(top: AppPaddings.globalPadding * 0.75),
                 child: Icon(Icons.remove),
