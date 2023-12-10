@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robot_controller/app/src/constants/colors.dart';
 import 'package:robot_controller/app/src/constants/paddings.dart';
 import 'package:robot_controller/app/view/widgets/app_font_16.dart';
 import 'package:robot_controller/app/view/widgets/app_font_20.dart';
 import 'package:robot_controller/app/view/widgets/app_tile.dart';
+import 'package:robot_controller/home/cubit/home_cubit.dart';
 
 class HomeRobotContainer extends StatelessWidget {
-  const HomeRobotContainer({super.key});
+  const HomeRobotContainer({super.key, required this.isWorking});
+  final bool isWorking;
 
   @override
   Widget build(BuildContext context) {
@@ -24,26 +27,31 @@ class HomeRobotContainer extends StatelessWidget {
                   text: 'Hexapod',
                   fontWeight: FontWeight.w600,
                 ),
-                AppTile(
-                  isExpanded: false,
-                  color: AppColor.green,
-                  padding: 10,
-                  radius: 16,
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.link,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: AppPaddings.globalPadding / 2,
-                      ),
-                      AppFont16(
-                        text: 'Połączony',
-                        color: Colors.white,
-                        isBigMajorant: true,
-                      )
-                    ],
+                InkWell(
+                  onTap: () {
+                    context.read<HomeCubit>().isRobotWorking();
+                  },
+                  child: AppTile(
+                    isExpanded: false,
+                    color: isWorking ? AppColor.green : AppColor.red,
+                    padding: 10,
+                    radius: 16,
+                    child: Row(
+                      children: [
+                        Icon(
+                          isWorking ? Icons.link : Icons.link_off,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: AppPaddings.globalPadding / 2,
+                        ),
+                        AppFont16(
+                          text: isWorking ? 'Połączony' : 'Rozłączony',
+                          color: Colors.white,
+                          isBigMajorant: true,
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],

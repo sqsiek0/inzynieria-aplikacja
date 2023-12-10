@@ -4,11 +4,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:robot_controller/app/hive/models/coordinates_model.dart';
 import 'package:robot_controller/app/services/permission.dart';
 import 'package:robot_controller/app/src/enums/enums.dart';
+import 'package:robot_controller/home/repository/home_repository.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
+  final HomeRepository _homeRepository = HomeRepository();
 
   void fetchLocation() async {
     emit(HomeLoading());
@@ -37,10 +39,28 @@ class HomeCubit extends Cubit<HomeState> {
         ),
       );
     } catch (e) {
-      emit(HomeFailed(
-        message: e.toString(),
-        status: Status.failed,
-      ));
+      emit(
+        HomeFailed(
+          message: e.toString(),
+          status: Status.failed,
+        ),
+      );
+    }
+  }
+
+  Future<void> isRobotWorking() async {
+    if (state is HomeSuccess) {
+      final currentState = state as HomeSuccess;
+      try {
+        final body = await _homeRepository.isRobotWorking();
+        emit(
+          currentState.copyWith(isWorking: body),
+        );
+      } catch (e) {
+        emit(
+          HomeFailed(message: e.toString(), status: Status.failed),
+        );
+      }
     }
   }
 }

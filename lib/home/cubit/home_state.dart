@@ -11,6 +11,7 @@ class HomeSuccess extends HomeState {
   final Placemark location;
   final double longitude;
   final double latitude;
+  final bool isWorking;
 
   final Status status;
 
@@ -19,18 +20,21 @@ class HomeSuccess extends HomeState {
     required this.longitude,
     required this.latitude,
     required this.status,
+    this.isWorking = false,
   });
 
   HomeSuccess copyWith({
     Placemark? location,
     double? longitude,
     double? latitude,
+    bool? isWorking,
     Status? status,
   }) {
     return HomeSuccess(
       location: location ?? this.location,
       longitude: longitude ?? this.longitude,
       latitude: latitude ?? this.latitude,
+      isWorking: isWorking ?? this.isWorking,
       status: status ?? this.status,
     );
   }

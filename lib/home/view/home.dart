@@ -78,7 +78,11 @@ class _HomeState extends State<Home> {
                         opacity: opacity,
                         globalKey: widget.globalKey,
                       ),
-                      const SliverToBoxAdapter(child: HomeRobotContainer()),
+                      SliverToBoxAdapter(
+                        child: HomeRobotContainer(
+                          isWorking: state.isWorking,
+                        ),
+                      ),
                       SliverToBoxAdapter(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
