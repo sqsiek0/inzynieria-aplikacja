@@ -46,7 +46,7 @@ class ControllerCubit extends Cubit<ControllerState> {
           isLoading: true,
         ),
       );
-      await _controllerRepository.translateBody(axis, value);
+      await _controllerRepository.rotateBody(axis, value);
       emit(
         state.copyWith(
           isLoading: false,

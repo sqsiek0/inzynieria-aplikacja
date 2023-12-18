@@ -15,7 +15,7 @@ class BodyControllerWalkWidget extends StatefulWidget {
 }
 
 class _BodyControllerWalkWidgetState extends State<BodyControllerWalkWidget> {
-  bool walkValue = false;
+  bool walkValue = true;
   ButtonDirection buttonDirection = ButtonDirection.stop;
   ButtonDirection oldButtonDirection = ButtonDirection.stop;
 
