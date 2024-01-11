@@ -13,10 +13,11 @@ class AppDrawer extends StatelessWidget {
       'Flutter',
       'Python',
       'Fusion 360',
-      'Unity???',
       'ROS2',
       'Git',
-      'Docker'
+      'Docker',
+      'Flask',
+      'Flask_mqtt'
     ];
 
     return Drawer(
@@ -31,10 +32,11 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(
                   height: AppPaddings.globalPadding,
                 ),
-                Container(
+                Image.asset(
+                  'assets/silnik.HEIC',
                   height: 150,
                   width: double.infinity,
-                  color: Colors.amber.shade100,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(
                   height: 5,
@@ -48,10 +50,11 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(
                   height: AppPaddings.globalPadding,
                 ),
-                Container(
+                Image.asset(
+                  'assets/rasberry.HEIC',
                   height: 150,
                   width: double.infinity,
-                  color: Colors.amber.shade100,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(
                   height: 5,
@@ -65,10 +68,11 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(
                   height: AppPaddings.globalPadding,
                 ),
-                Container(
+                Image.asset(
+                  'assets/plytka.HEIC',
                   height: 150,
                   width: double.infinity,
-                  color: Colors.amber.shade100,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(
                   height: 5,

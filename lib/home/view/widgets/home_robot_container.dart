@@ -64,7 +64,7 @@ class HomeRobotContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Flexible(
                       flex: 2,
@@ -80,66 +80,66 @@ class HomeRobotContainer extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        AppTile(
-                            isExpanded: false,
-                            padding: 10,
-                            radius: 16,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const AppFont16(
-                                  text: 'Bateria',
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset('assets/batery.png',
-                                        width: 20, height: 20),
-                                    const SizedBox(
-                                      width: AppPaddings.globalPadding / 2,
-                                    ),
-                                    AppFont16(
-                                      text: '24%',
-                                      color: Colors.black.withOpacity(0.5),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
-                        const SizedBox(
-                          height: AppPaddings.globalPadding / 2,
-                        ),
-                        AppTile(
-                          isExpanded: false,
-                          padding: 10,
-                          radius: 16,
-                          child: Column(
-                            children: [
-                              const AppFont16(
-                                text: 'Czas pracy',
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Image.asset('assets/clock.png',
-                                      width: 20, height: 20),
-                                  const SizedBox(
-                                    width: AppPaddings.globalPadding / 2,
-                                  ),
-                                  AppFont16(
-                                    text: '3 h',
-                                    color: Colors.black.withOpacity(0.5),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
+                        // AppTile(
+                        //     isExpanded: false,
+                        //     padding: 10,
+                        //     radius: 16,
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         const AppFont16(
+                        //           text: 'Bateria',
+                        //         ),
+                        //         const SizedBox(
+                        //           height: 5,
+                        //         ),
+                        //         Row(
+                        //           crossAxisAlignment: CrossAxisAlignment.center,
+                        //           children: [
+                        //             Image.asset('assets/batery.png',
+                        //                 width: 20, height: 20),
+                        //             const SizedBox(
+                        //               width: AppPaddings.globalPadding / 2,
+                        //             ),
+                        //             AppFont16(
+                        //               text: '24%',
+                        //               color: Colors.black.withOpacity(0.5),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ],
+                        //     )),
+                        // const SizedBox(
+                        //   height: AppPaddings.globalPadding / 2,
+                        // ),
+                        // AppTile(
+                        //   isExpanded: false,
+                        //   padding: 10,
+                        //   radius: 16,
+                        //   child: Column(
+                        //     children: [
+                        //       const AppFont16(
+                        //         text: 'Czas pracy',
+                        //       ),
+                        //       const SizedBox(
+                        //         height: 5,
+                        //       ),
+                        //       Row(
+                        //         children: [
+                        //           Image.asset('assets/clock.png',
+                        //               width: 20, height: 20),
+                        //           const SizedBox(
+                        //             width: AppPaddings.globalPadding / 2,
+                        //           ),
+                        //           AppFont16(
+                        //             text: '3 h',
+                        //             color: Colors.black.withOpacity(0.5),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // )
                       ],
                     ),
                   )

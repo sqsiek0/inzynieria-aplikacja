@@ -90,15 +90,13 @@ class _PersonalInfoState extends State<PersonalInfo> {
               alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.only(top: AppPaddings.globalPadding),
-                child: CircleAvatar(
-                  radius: 60,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(75),
-                      ),
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset(
+                    'assets/ja.HEIC',
+                    width: 120,
+                    height: 120,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
